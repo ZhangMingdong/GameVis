@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <style name="axis style">
+        /* Axis */
+        .axis {
+            font: 10px sans-serif;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        .x.axis path {
+            display: none;
+        }
+    </style>
+    <style name="bar-chart style">
+        /* bar chart */
+        bar-chart {
+            width: 100%;
+            height: 95%;
+            display: block;
+            z-index: 0;
+            overflow: hidden;
+            font-size: 10px;
+        }
+
+        .bar {
+            /*fill: steelblue;*/
+            opacity: .6
+        }
+
+        .bar:hover {
+            /*fill: brown;*/
+            opacity: 1.0
+        }
+
+    </style>
+    <style name="chord style">
+        /* chord */
+        chord {
+            display: block;
+            z-index: 0;
+            overflow: hidden;
+            font-size: 10px;
+        }
+
+        .chord path {
+            fill-opacity: .67;
+            stroke: #000;
+            stroke-width: .5px;
+        }
+
+    </style>
+    <style name="game-chart style">
+
+        /* game chart */
+        game-chart {
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 0;
+            overflow: hidden;
+            font-size: 10px;
+        }
+
+        game-chart circle {
+            opacity: 1;
+            cursor: pointer;
+            stroke-width: 2;
+        }
+
+        game-chart circle:hover {
+            stroke: blue;
+        }
+
+        game-chart text {
+            fill: darkblue;
+            stroke: none;
+        }
+
+        game-chart .x-axis path, game-chart .y-axis path {
+            stroke: none;
+            fill: none;
+        }
+
+        game-chart .x-axis line, game-chart .y-axis line {
+            stroke: black;
+        }
+    </style>
+    <style name="tip style">
+        <!--tip style-->
+        .d3-tip {
+            line-height: 1;
+            font-weight: bold;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 2px;
+        }
+
+        /* Creates a small triangle extender for the tooltip */
+        .d3-tip:after {
+            box-sizing: border-box;
+            display: inline;
+            font-size: 10px;
+            width: 100%;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.8);
+            content: "\25BC";
+            position: absolute;
+            text-align: center;
+        }
+
+        /* Style northward tooltips differently */
+        .d3-tip.n:after {
+            margin: -1px 0 0 0;
+            top: 100%;
+            left: 0;
+        }
+    </style>
+    <style name="html style">
+        /* body */
+        body, html {
+            margin: 0;
+            font-family: helvetica;
+            margin: auto;
+            width: 90%;
+        }
+
+        .header{
+            height:5%;
+            width:100%;
+            background-color: black;
+            color:white;
+        }
+        .quarter{
+            width:100%;
+            height:200px;
+        }
+        .row8{
+            float:left;
+            width:50%;
+            height:800px;
+        }
+        .innerVis{
+            width:100%;
+            height:100%;
+        }
+
+
+    </style>
+    <style name="line chart style">
+        line-chart {
+            width: 100%;
+            height: 100%;
+            position:relative;
+            display: block;
+            z-index: 0;
+            overflow: hidden;
+            font-size: 10px;
+            background-color: honeydew;
+        }
+        line-chart .line {
+            fill: none;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
+
+    </style>
+    <style name="scatter plot">
+        body, html {
+        }
+        .scatter-container {
+            width: 100%;
+            float: left;
+            height: 800px;
+            margin: 0;
+            color: lime;
+            background-color: lightblue;
+            font-family: helvetica;
+            margin: auto;
+        }
+
+        .detail {
+            width: 50%;
+            float: left;
+            height: 400px;
+        }
+
+        scatter-plot {
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 0;
+            overflow: hidden;
+            font-size: 10px;
+        }
+
+        scatter-plot circle {
+            fill: yellow;
+            opacity: 1;
+            cursor: pointer;
+            stroke-width: 2;
+        }
+
+        scatter-plot circle:hover {
+            stroke: white;
+        }
+
+        scatter-plot text {
+            fill: black;
+            stroke: none;
+        }
+
+        scatter-plot .x-axis path, scatter-plot .y-axis path {
+            stroke: none;
+            fill: none;
+        }
+
+        scatter-plot .x-axis line, scatter-plot .y-axis line {
+            stroke: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+    <style name="game chart">
+        .game-container {
+            width: 50%;
+            float: left;
+            height: 400px;
+        }
+
+        .game-detail {
+            width: 50%;
+            float: left;
+            height: 400px;
+        }
+    </style>
+    <title>Game Vis</title>
+</head>
+<script src="../lib/d3.v4.js"></script>
+<script src="../lib/d3-tip.js"></script>
+
+<script src="../lib/angular-1.2.6/angular.js"></script>
+<script src="../lib/angular-1.2.6/angular-route.js"></script>
+<!--
+<script src="js/TopicTree.js"></script>
+<script src="js/MainCtrl.js"></script>
+<script src="js/ArticleInfo.js"></script>
+<script src="js/ColorManager.js"></script>
+<script src="js/MovieInfo.js"></script>
+-->
+<script src="js/WolvesCtrl.js"></script>
+<script src="js/chord.js"></script>
+<script src="js/gameChart.js"></script>
+<script src="js/lineChart.js"></script>
+<script src="js/barChart.js"></script>
+<script src="js/GameVis.js"></script>
+<script src="js/ScatterPlot.js"></script>
+<body  ng-app="myApp"  ng-controller="WolvesCtrl">
+
+<div class="row8">
+    <chord class="innerVis" data="data.network"></chord>
+</div>
+<div class="row8">
+    <chord class="innerVis" data="data.clique"></chord>
+</div>
+<bar-chart class="quarter" data="data.vmData"></bar-chart>
+<bar-chart class="quarter" data="data.hshrData"></bar-chart>
+
+
+</body>
+
